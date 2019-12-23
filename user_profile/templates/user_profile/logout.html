@@ -1,0 +1,9 @@
+{% extends "articles/home.html" %}
+{% block content %}
+<h2 style="margin: 20px"> You have been logged out </h2>
+<div class = "border-top pt-3" style="margin: 20px">
+    <small class = "text-muted">
+        Need an account? <a class="ml-2" href="{% url 'login' %}"> Log In Again </a>
+    </small>
+</div>
+{% endblock content %}

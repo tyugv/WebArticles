@@ -1,0 +1,16 @@
+{% extends 'articles/home.html' %}
+{% block content %}
+<hr>
+<div class="container-fluid", style="margin-top: 20px;">
+    <div class="row">
+        <div class="card-header border-0">
+            <img src="https://www.seekpng.com/png/detail/349-3499598_portrait-placeholder-placeholder-person.png" alt="" height="250" width="240">
+        </div>
+        <div class="card-block px-2" style="margin-top: 10px">
+            <h4 class="card-title" style="margin-left: 10px; margin-top: 10px;">{{user.username|title}}</h4>
+            <h4 class="card-title" style="margin-left: 10px; margin-top: 10px;">{{user.email}}</h4>
+        </div>
+    </div>
+</div>
+<hr>
+{% endblock content %}

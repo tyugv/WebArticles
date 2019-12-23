@@ -1,0 +1,68 @@
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+
+  <body>
+  	<header>
+	  	<nav class="navbar navbar-expand-md navbar-light bg-light">
+		    <a href="#" class="navbar-brand">
+		        <h5 style="margin-top: 8px"> LOGO </h5>
+		    </a>
+		    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+		        <span class="navbar-toggler-icon"></span>
+		    </button>
+
+		    <div class="collapse navbar-collapse" id="navbarCollapse">
+		        <div class="navbar-nav">
+		            <a href="{% url 'articles-home' %}" class="nav-item nav-link active">Home</a>
+					{% if user.is_authenticated %}
+						<a href="{% url 'profile-home' %}" class="nav-item nav-link">Profile</a>
+					{% endif %}
+		        </div>
+		        <div class="navbar-nav ml-auto">
+					{% if user.is_authenticated %}
+						<a href="{% url 'logout' %}" class="nav-item nav-link">Logout</a>
+					{% else %}
+						<a href="{% url 'login' %}" class="nav-item nav-link">Login</a>
+					{% endif %}
+		        </div>
+		    </div>
+		</nav>
+	</header>
+	{% if messages %}
+		{% for message in messages %}
+			<div class = "alert alert-{{ message.tags }}">
+				{{ message }}
+			</div>
+		{% endfor %}
+	{% endif %}
+	{% block content %}
+	<div class="container-fluid", style="margin-top: 20px;">
+		<div class="row">
+			{% for item in "x"|ljust:"6" %}
+	    		<div class="card" style="width: 18rem; margin: 30px">
+				  <img class="card-img-top" src="https://i.redd.it/l6fd3r1wwvu31.jpg" alt="Card image cap">
+				  <div class="card-body">
+				    <h5 class="card-title">Card title</h5>
+				    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+				    <a href="#" class="btn btn-primary">Go somewhere</a>
+				  </div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+	{% endblock content %}
+
+
+
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
