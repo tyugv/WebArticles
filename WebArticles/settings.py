@@ -145,7 +145,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
-LOGIN_REDIRECT_URL = 'articles/'
+LOGIN_REDIRECT_URL = '/articles'
 SITE_ID = 1
 
 # Heroku: Update database configuration from $DATABASE_URL.
