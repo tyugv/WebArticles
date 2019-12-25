@@ -145,7 +145,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
-LOGIN_REDIRECT_URL = 'articles-home'
+LOGIN_REDIRECT_URL = 'articles/'
 SITE_ID = 1
 
 # Heroku: Update database configuration from $DATABASE_URL.
@@ -158,4 +158,3 @@ DATABASES['default'].update(db_from_env)
 
 # The absolute path to the directory where collectstatic will collect static files for deployment.
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
