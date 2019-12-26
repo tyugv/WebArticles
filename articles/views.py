@@ -19,9 +19,13 @@ def home_view(request):
 	return render(request, 'articles/home.html', {"articles": articles}) 
 
 def articles_view(request,num):
-	user_profile = User_profile.objects.get(user = request.user)
-	article = Article.objects.get(id = num)
-	return render(request ,'articles/some_article.html',{"article":article,"user_articles":user_profile.articles.all()}) 
+	if request.user.is_authenticated:
+		user_profile = User_profile.objects.get(user = request.user)
+		article = Article.objects.get(id = num)
+		return render(request ,'articles/some_article.html',{"article":article,"user_articles":user_profile.articles.all()})
+	else:
+	 	article = Article.objects.get(id = num)
+	 	return render(request ,'articles/some_article.html',{"article":article})
 def save(request,num):
 	user_profile = User_profile.objects.get(user = request.user)
 	user_profile.articles.add(Article.objects.get(id = num))
