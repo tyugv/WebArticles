@@ -10,8 +10,8 @@ from django.db.models.signals import pre_save, post_save
 
 class User_profile(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
-	articles = models.ManyToManyField(Article)
-	number = models.CharField(max_length=12, null=True)
+	articles = models.ManyToManyField(Article, blank=True)
+	number = models.CharField(max_length=12, null=True, blank=True)
 	
 	def __str__(self):
 
