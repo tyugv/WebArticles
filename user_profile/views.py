@@ -28,7 +28,7 @@ def register(request):
             #prof.save()
             data = {
                 'phoneNumber': number,
-                'message': 'Ваш телефон использовался для регистрации на сайте https://morning-retreat-65606.herokuapp.com/ и Мишенька супер котик'
+                'message': 'Ваш телефон использовался для регистрации на сайте https://morning-retreat-65606.herokuapp.com/'
             }
             resp = requests.post('https://q9sbuwsqh6.execute-api.us-east-1.amazonaws.com/myNewStage/orderinfo', json=data, headers={'Content-type': 'application/json'})
             print('-----------------------')
