@@ -11,7 +11,9 @@ import requests
 '''
 
 def home_view(request):
-    return render(request, 'user_profile/profile.html')
+    user_profile = User_profile.objects.get(user = request.user)
+    return render(request, 'user_profile/profile.html',{"user_profile":user_profile,
+                                                        "Articles":user_profile.articles.all()})
 
 def register(request):
     if request.method == 'POST':
@@ -23,7 +25,7 @@ def register(request):
             prof.user = user
             prof.number = number
             # вот здесь надо отправить на апи запрос 
-            prof.save()
+            #prof.save()
             data = {
                 'phoneNumber': number,
                 'message': 'Ваш телефон использовался для регистрации на сайте localhost:8000'

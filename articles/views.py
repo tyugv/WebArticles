@@ -1,5 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from .models import Article
+from user_profile.models import User_profile
 
 # значит нам надо создать
 # параметр request означает запрос типа. Запрос же знаешь да?
@@ -13,4 +15,18 @@ from django.http import HttpResponse
 # теперь нам надо подключить бутсрап и сделать менюшку
 
 def home_view(request):
-	return render(request, 'articles/home.html') 
+	articles = Article.objects.all()
+	return render(request, 'articles/home.html', {"articles": articles}) 
+
+def articles_view(request,num):
+	user_profile = User_profile.objects.get(user = request.user)
+	article = Article.objects.get(id = num)
+	return render(request ,'articles/some_article.html',{"article":article,"user_articles":user_profile.articles.all()}) 
+def save(request,num):
+	user_profile = User_profile.objects.get(user = request.user)
+	user_profile.articles.add(Article.objects.get(id = num))
+	return redirect(f'/articles/{num}/')
+def delete(request,num):
+	user_profile = User_profile.objects.get(user = request.user)
+	user_profile.articles.remove(Article.objects.get(id = num))
+	return redirect(f'/articles/{num}/')

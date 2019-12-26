@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from articles.models import Article
+from django.dispatch import receiver
+from django.db.models.signals import pre_save, post_save
 
 # мы тут импортируем Юзер чтобы связать с нашим кастомным классом, поскольку
 # мы дополяем их модель. Эт понятно?
@@ -12,7 +14,16 @@ class User_profile(models.Model):
 	number = models.CharField(max_length=12, null=True)
 	
 	def __str__(self):
+
 		return self.user.username
+
+
+@receiver(post_save, sender=User)
+def my_handler(sender, instance, created, **kwargs):
+    if created:
+        pers = User_profile()
+        pers.user = instance
+        pers.save()
 '''
 так как мы щас создали модель нашу чтобы сохранить в бд нам надо создать миграцию, то бишь
 не, норм

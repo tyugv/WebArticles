@@ -1,0 +1,24 @@
+{% extends "articles/home.html" %}
+{% block content %}
+
+<div class="card text-center">
+  <div class="card-body">
+    <h5 class="card-title">{{article.title}}</h5>
+    <p class="card-text">{{article.description}}</p>
+    {% if article in user_articles %}
+    <a href="delete/" class="btn btn-primary">Удалить</a>
+    {% else %}
+    <a href="save/" class="btn btn-primary">Сохраниь</a>
+    {% endif %}
+    <div class="card" style="width: 18rem;">
+  <img class="card-img-top" src="{{article.imgLink}}" alt="Card image cap">
+
+</div>
+  </div>
+</div>
+
+
+
+
+
+{% endblock content %}
