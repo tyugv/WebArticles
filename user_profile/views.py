@@ -27,7 +27,7 @@ def register(request):
             #prof.save()
             prof2 = User_action()
             prof2.user = user
-            prof2.save()
+            #prof2.save()
             # вот здесь надо отправить на апи запрос 
             
             data = {
