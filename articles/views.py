@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Article
-from user_profile.models import User_profile
+from user_profile.models import User_profile, User_action
 
 # значит нам надо создать
 # параметр request означает запрос типа. Запрос же знаешь да?
@@ -21,8 +21,12 @@ def home_view(request):
 def articles_view(request,num):
 	if request.user.is_authenticated:
 		user_profile = User_profile.objects.get(user = request.user)
+		user_action = User_action.objects.get(user = request.user)
 		article = Article.objects.get(id = num)
-		return render(request ,'articles/some_article.html',{"article":article,"user_articles":user_profile.articles.all()})
+		return render(request ,'articles/some_article.html',{"article":article,
+			"user_articles":user_profile.articles.all(),
+			"useractions":user_action.actions.all(),
+			"user":request.user})
 	else:
 	 	article = Article.objects.get(id = num)
 	 	return render(request ,'articles/some_article.html',{"article":article})
@@ -30,7 +34,27 @@ def save(request,num):
 	user_profile = User_profile.objects.get(user = request.user)
 	user_profile.articles.add(Article.objects.get(id = num))
 	return redirect(f'/articles/{num}/')
+
 def delete(request,num):
 	user_profile = User_profile.objects.get(user = request.user)
 	user_profile.articles.remove(Article.objects.get(id = num))
+	return redirect(f'/articles/{num}/')
+
+def like(request,num):
+	article = Article.objects.get(id = num)
+	print(article.likes)
+	article.likes += 1
+	print(article.likes)
+	article.save()
+	user_action = User_action.objects.get(user = request.user)
+	user_action.actions.add(Article.objects.get(id = num))
+	return redirect(f'/articles/{num}/')
+
+def dislike(request,num):
+	article = Article.objects.get(id = num)
+	dislikes = article.dislikes
+	article.dislikes +=  1
+	article.save()
+	user_action = User_action.objects.get(user = request.user)
+	user_action.actions.add(Article.objects.get(id = num))
 	return redirect(f'/articles/{num}/')

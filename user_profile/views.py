@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
-from .models import User_profile
+from .models import User_profile, User_action
 from .forms import UserRegisterForm
 import requests
 
@@ -24,6 +24,8 @@ def register(request):
             prof = User_profile()
             prof.user = user
             prof.number = number
+            prof2 = User_action()
+            prof2.user = user
             # вот здесь надо отправить на апи запрос 
             #prof.save()
             data = {
