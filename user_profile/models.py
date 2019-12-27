@@ -29,6 +29,6 @@ def my_handler(sender, instance, created, **kwargs):
         pers = User_action()
         pers.user = instance
         pers.save()
-        pers2 = User_profile()
-        pers2.user = instance
-        pers2.save()
+        newpr = User_profile()
+        newpr.user = instance
+        newpr.save()
