@@ -17,20 +17,18 @@ class User_profile(models.Model):
 class User_action(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
 	actions = models.ManyToManyField(Article, blank=True)
+	def __str__(self):
 
+		return self.user.username
 
-
-@receiver(post_save, sender=User)
-def my_handler(sender, instance, created, **kwargs):
-    if created:
-        pers = User_profile()
-        pers.user = instance
-        pers.save()
 
 
 @receiver(post_save, sender=User)
 def my_handler(sender, instance, created, **kwargs):
     if created:
         pers = User_action()
+        pers.user = instance
+        pers.save()
+        pers = User_profile()
         pers.user = instance
         pers.save()
