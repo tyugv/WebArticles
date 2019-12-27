@@ -27,7 +27,7 @@ def register(request):
             prof2 = User_action()
             prof2.user = user
             # вот здесь надо отправить на апи запрос 
-            #prof.save()
+            prof.save()
             data = {
                 'phoneNumber': number,
                 'message': 'Ваш телефон использовался для регистрации на сайте https://morning-retreat-65606.herokuapp.com/'
